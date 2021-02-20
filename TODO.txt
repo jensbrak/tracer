@@ -1,0 +1,10 @@
+Todo
+====
+
+Nothing in particular. Depends solely on any response from other
+people. I am, together with a few friends of mine, planning and
+designing a more serious ray tracer to be written in Ocaml. I'll
+get back with an URL when the time comes.
+
+===========
+End of Todo

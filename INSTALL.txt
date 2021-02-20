@@ -1,0 +1,37 @@
+Installation Instructions
+=========================
+
+The program is not very advanced so there's really not much to it.
+
+The makefile in the ./src directory should explain it well enough.
+Just type
+
+  make help
+
+for rules available. In short, the following steps has to be taken:
+
+1) Edit the file ./src/Makefile to suit your needs. This should at the
+most include editing the BASEDIR and BINDIR variables.
+
+2) For a byte code version type
+
+  make bc
+
+This creates a byte code version of the ray tracer in the ./src
+directory. Or, for a native code version type
+
+  make nc
+
+and a machine dependant (see the Ocaml distribution for supported
+platforms) and faster version of the ray tracer will be created in the
+./src directory. 
+
+3) To install the tracer (right now this involves just copying the
+latest produced binary to the specified (see BINDIR in ./src/Makefile)
+directory.
+
+Enjoy!
+
+================================
+End of Installation Instructions
+

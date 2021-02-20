@@ -1,12 +1,31 @@
-# tracer
-Simple raytracer using Ocaml to render 3D scenes based on simplified PovRay description files. 
-The code was written long ago and not touched since. I just add it here on GitHub for fun.
-Everything is 'as is' and only thing added is this file, based on the readme.txt file.
+Readme
+======
+
+Index
+-----
+
+Introduction
+What is ray tracing?
+
+Prerequisites
+Files & directories
+Installation
+
+History
+Performance
+
+Functionality
+Usage
+Syntax of description files
+
+Credits
+Bugs & feedback
 
 
-# Introduction
+Introduction
+------------
 
-This is the readme for the Tracer, version 1.01. The file
+This is the readme file for the Tracer, version 1.01. The file
 describes the tracer, why it was made, how it is used and how the
 files in this distribution are organized.
 
@@ -30,46 +49,62 @@ what the program may do if used. I really don't know what could go so
 wrong but don't come to me whining if something goes wrong ;-)
 
 
-# What is Ray Tracing?
+What is Ray Tracing?
+--------------------
 
-See https://en.wikipedia.org/wiki/Ray_tracing_(graphics)
+Instead of writing a short tutorial I'd like to redirect:
+
+  http://www.povray.org
+
+look for the FAQ or go directly to the relevant document:
+
+  http://www.povray.org/documents/rayfaq/part1/faq-doc-2.html
+
+This document describes ray tracing in short.
 
 
-# Prerequisites
+Prerequisites
+-------------
 
-The Tracer is tested with Objective ML version 2.04 but might be
+The Tracer is tested with Objective ML version 2.04 but should be
 compatible with version 2.00 and up. Ocaml can be downloaded from
 
-  https://ocaml.org/
+  http://caml.inria.fr
 
 The tracer uses the Unix library of Ocaml. In addition to this,
 a standard make utility is required. 
 
 
-# Files & directories
+Files & directories
+-------------------
 
 The files and directories are structured as follows:
 
-| Directory | Purpose |
-| --------- | ------- |
-| `./bin/` | directory for binaries |
-| `./examples/` | some example scene description files and referenced textures |
-| `./src/` | source code directory See IMPLEMENTATION.txt for description of the the files in this directory |
-| `./BUGS.txt` | bugs and shortcomings not fixed |
-| `./IMPLEMENTATION.txt` | a short implementation description |
-| `./INSTALL.txt` | installation instructions |
-| `./POVSYNTAX.txt` | description of the modified PovRay description file syntax and grammar |
-| `./README.txt` | this file |
-| `./TODO.txt` | planned modifications and updates |
-| `./HISTORY.txt` | short log of changes (sorted by version number) |
+  ./bin/			directory for binaries
+  ./examples/			some example scene description files
+				and referenced textures
+  ./src/			source code directory
+				See IMPLEMENTATION.txt for description
+				of the the files in this directory
+  ./BUGS.txt			bugs and shortcomings not fixed
+  ./IMPLEMENTATION.txt		a short implementation description
+  ./INSTALL.txt			installation instructions
+  ./POVSYNTAX.txt		description of the modified PovRay
+				description file syntax and grammar
+  ./README.txt			this file
+  ./TODO.txt			planned modifications and updates
+  ./HISTORY.txt			short log of changes (sorted by version
+				number)
 
 
-# Installation
+Installation
+------------
 
-See the file `INSTALL.txt` for installation instructions.
+See the file INSTALL.txt for installation instructions.
 
 
-# History
+History
+-------
 
 Many programmers hesitate to use functional languages as they are
 considered purely academic with no or little real life use. It is also
@@ -97,7 +132,8 @@ and Ocaml performed best. This was some time ago so there may be
 better versions of the compilers out now.
 
 
-# Performance
+Performance
+-----------
 
 Simple benchmarking shows that the ML implementation performs
 impressively good (in my opinion). The goal was to have a tracer
@@ -124,7 +160,8 @@ match. However, and I haven't tested this, if one could turn off all
 optimizations in PovRay it may be interesting to compare.
 
 
-# Functionality
+Functionality
+-------------
 
 This tracer is very limited. The purpose of it was not to make another
 PovRay (or similar). The tracer reads a modified subset of the PovRay
@@ -141,13 +178,13 @@ the artist and his tools to model the world :) See some of the
 examples and judge Yourself.
 
 
-# Usage
+Usage
+-----
 
 The tracer is command line driven, ie it is invoked from a shell.
 This is a what You'll get by invoking the tracer with the -help
 option:
 
-```
   Usage: tracer [options] filename
   Produces an image by ray tracing a scene described in a file read
   from stdin.
@@ -166,21 +203,18 @@ option:
     -x i: Create bitmap with width i pixels
     -y j: Create bitmap with height j pixels
     -p t: Show progress indicator t, t can be: counter, spinner, percent or bar
-```
 
 A typical use would be:
 
-```
     ./tracer -z 1 -w 1 -h 1 -x 240 -t -p percent picture.ppm < scene.pov
-```
 
 where nicepicture.pov is a PovRay description file (with limited
 syntax) and nicepicture.ppm is the resulting bitmap.
 
-The zoom (`-z`) works as follows: greater zoom value results in smaller
+The zoom (-z) works as follows: greater zoom value results in smaller
 objects (ie zoom out).
 
-The width and height (`-w` and `-h`) describes the relation between the
+The width and height (-w and -h) describes the relation between the
 world and the picture, ie how many "world coordinates" per pixel there
 is.
 
@@ -193,23 +227,25 @@ enough contribution to the resulting bitmap. Greater value may lead to
 better image quality but not necessarily. It will for sure slow down
 the tracing process.
 
-The quickmode option (`-q`) can be used to test a more complex scene
+The quickmode option (-q) can be used to test a more complex scene
 before the final bitmap is produced. No shadows or reflections will be
 visible, only the raw objects. On the other hand tracing is much
 faster.
 
-The timer (`-t`) can be used to benchmark the tracer. The timer only
+The timer (-t) can be used to benchmark the tracer. The timer only
 measure time spent tracing; reading PovRay description file and its
 referenced textures as well as writing the resulting bitmap is not
 measured.
 
 
-# Syntax of description files
+Syntax of description files
+---------------------------
 
-The syntax of the description files can be found in `POVSYNTAX.txt`.
+The syntax of the description files can be found in POVSYNTAX.txt.
 
 
-# Credits
+Credits
+-------
 
 The makefile in use is made by Markus Mottl. See ./src/Makefile for
 further information.
@@ -219,12 +255,13 @@ software available for us to use freely.
 
 The PovRay team for writing PovRay.
 
-Last, Cons T. Ã…hs for the course Methods of Programming II and the
+Last, Cons T. Åhs for the course Methods of Programming II and the
 assigment(specification) in the course. Without them this tracer
 wouldn't exist.
 
 
-# Bugs & feedback
+Bugs & feedback
+---------------
 
 Feedback and comments are encouraged! If You find bugs You are also
 welcome with them but the program is not written to be perfect so I
@@ -234,3 +271,10 @@ program :)
 I am especially interested in hints to make the program faster by
 using the compiler better.
 
+
+Jens Olsson
+jenso@csd.uu.se
+http://www.csd.uu.se/~jenso
+
+=============
+End of Readme

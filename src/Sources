@@ -1,0 +1,30 @@
+SOURCES  = \
+error.ml \
+math.mli math.ml \
+timer.mli timer.ml \
+option.mli option.ml \
+char2.mli char2.ml \
+stream.mli stream.ml \
+progress.mli progress.ml \
+vector.mli vector.ml \
+ray.mli ray.ml \
+light.mli light.ml \
+color.mli color.ml \
+bitmap.mli bitmap.ml \
+finish.mli finish.ml \
+pigment.mli pigment.ml \
+surface.mli surface.ml \
+hitpoint.mli hitpoint.ml \
+plane.mli plane.ml \
+triangle.mli triangle.ml \
+parallelogram.mli parallelogram.ml \
+sphere.mli sphere.ml \
+shape.mli shape.ml \
+scene.mli scene.ml \
+tracer.mli tracer.ml \
+ppm.mli ppm.ml \
+camera.mli camera.ml \
+povparsetree.mli povparsetree.ml \
+povparser.mly povlexer.mll \
+options.mli options.ml \
+main.ml

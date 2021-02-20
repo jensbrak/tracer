@@ -1,0 +1,68 @@
+Bugs and Shortcomings
+=====================
+
+Bugs
+----
+
+No known bugs
+
+
+Shortcomings
+------------
+
+* Naive implementation. Many of the features of Ocaml is not used and
+  the code is very naive. For instance, the module system and/or the
+  OO features could be used more extensively. 
+
+* Ineffective memory usage. No or little concerns has been made
+  to decrease memory usage. For instance, if a textures is referred
+  to several times in a scene description file, it is read and
+  stored several times. This is very ineffective and slows down
+  both parsing and garbage collecting. In addition, the garbage
+  collector might be tunable to enhance performance. I know little
+  about this.
+
+* Some modules too comprehensive and general, especially the PPM
+  module (including the Stream module). There's for instance no need 
+  to handle anything else than 3^256 colors (as the color components 
+  in binary PPMs are represented as chars).
+
+* Error handling is a tricky business. The modules should not become
+  dependant on each other just because and error module is used.
+  Another requirement is that there has to be a way to track the source
+  of an exception easily. One problem is that when a certain function
+  in a certain module runs into trouble an exception might not just
+  be the answer. It is quite possible that it should be treated as
+  a warning instead. There are situations when it is up to the caller,
+  not the callee to decide the appropriate actions. This is one of the 
+  problems of writing reusable code (versus code written for a
+  specific purpose). One thought: would it make sense to be able to
+  backtrack an exception and resume execution from where the exception
+  was raised? Anyway, error handling is far from good in this program.
+
+* Interface file redundancy. I get a feeling that much of the
+  information in the .mli files is redundant. I was thinking of
+  generating the .mli files, with comments and all. The way I'm using
+  the interface files it is possible so maybe I have missed something?
+
+* Comments. There shouldn't be any duplicated information
+  in the .ml and .mli files and a person interested in just *using*
+  a module shouldn't have to look into the implementation. On the
+  other hand, the comments in the code should be easily maintained
+  by a person writing/modifying the modules.
+  My solution does this but there's just too much redundant
+  information right now. I'm not content with the comment style used,
+  but it is better than nothing or little.
+
+* Inconsequent use of records/variants. Some times records, sometimes
+  variants. Using variants is somewhat inflexible: if another field
+  is added, every clause that matches or constructs the particular
+  constructor has to be modified. I think records should be used to
+  define every datatype, and variants should be used only when a
+  datatype can have different representations and each constructor
+  within the variant should consist of a single record. This should
+  be the most flexible solution, but how is speed affected? Is there
+  other considerations as well?
+
+============================
+End of Bugs and Shortcomings

@@ -1,0 +1,21 @@
+History
+=======
+
+1.01 (2000-02-15)
+-----------------
+
+* (jenso) Progress indicator )-p option) added
+* (jenso) Basic shape parallelogram added 
+
+
+1.0 (2000-01-09)
+----------------
+
+* (jenso) Core functionality, including:
+  - Modified subset of PovRay scene description language
+  - PPM image format (for textures and traced images)
+  - Three basic shapes: triangles, spheres and infinite planes
+  - Diffuse lighting and reflection
+
+End of History
+==============

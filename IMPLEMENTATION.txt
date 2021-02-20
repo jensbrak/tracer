@@ -1,0 +1,80 @@
+Implementation Description
+==========================
+
+Introduction
+------------
+
+This file briefly describes the implementation of the ray tracer. The
+code is quite well commented so this file is not much more than a
+listing of the source code files.
+
+
+The files
+---------
+
+The files and directories in the ./src directory are, sorted by topic
+first, alphabetically second.
+
+Program building
+
+Makefile		Make file for project (definitions)
+Makefile.ocaml		General Ocaml Makefile (general rules)
+Sources			The list of source code files
+scripts/		Some less relevant sed scripts (to count
+			number of source code lines without comments)
+
+Source code files
+
+bitmap.ml[i]		2-dimensional matrix of colors
+camera.ml[i]		Viewpoint of a scene to trace
+char2.ml[i]		Assorted character functions
+color.ml[i]		Colors
+error.ml		General exeptions
+finish.ml[i]		Surface finish (reflection properties)
+hitpoint.ml[i]		Hitpoint of anintersecting ray
+light.ml[i]		Lightsources (pointlights)
+main.ml			Global definitions and main function
+math.ml[i]		Assorted math functions
+option.ml[i]		Lifted values (NONE | SOME x)
+options.ml[i]		Command line options to tracer
+parallelogram.ml[i]	Basic object: infinite spread, parallelogram borders
+pigment.ml[i]		Surface pigment (the color of a surface at a hitpoint)
+plane.ml[i]		Basic object; infinite thin, infinite spread
+povlexer.mll		Lexer rules for the simplified PovRay grammar
+povparser.mly		Parser rules for the simplified PovRay grammar
+povparsetree.ml[i]	Parsetree for the simplified PovRay grammar
+ppm.ml[i]		Ppm bitmap I/O.
+ray.ml[i]		Rays
+scene.ml[i]		The representation of a scene to trace
+shape.ml[i]		General object 
+sphere.ml[i]		Basic object; a spherical volume
+stream.ml[i]		Simple one character stream parser
+surface.ml[i]		Surface properties of an object (pigment & finish)
+timer.ml[i]		Timer functionality
+tracer.ml[i]		Tracing functions
+triangle.ml[i]		Basic object; infinite spread, triangle borders
+vector.ml[i]		3-dimensional vectors
+
+
+The idea
+--------
+
+The tracer implements a simple, straightforward recursive ray
+tracer. It traces images by, for each pixel in the bitmap to produce,
+sending rays from the camera [camera.mli] location into the scene
+[scene.mli] described by and read from a PovRay file [pov*.ml*]. If
+the ray intersects at least one object [shape.mli] the closest
+intersection is used. If the intersection point [hitpoint.mli] is
+illuminated by any light source [light.mli] the color [color.mli] of
+the intersected object is scaled with respect to the angle between the
+intersecting ray and the illuminating lightsource, resulting in shades
+and shadows.  This color is then blended with the color given by
+(recursively) sending out a bouncing ray and repeating the tracing
+process, resulting in reflections. The final color makes the color of
+the pixel currently being traced.
+
+=================================
+End of Implementation Description
+
+
+

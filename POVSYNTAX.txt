@@ -1,0 +1,89 @@
+Description File Syntax
+=======================
+
+The syntax of the description files used is a modified subset of the
+PovRay format.
+
+The ways to express grammars in pure text files is quite
+limited. Terminals are in lowercase, Brackets [ ] denotes optional rules and
+/epsilon/ denotes the epsilon rule. The following characters are
+terminals as well:   , { } < >
+
+Grammar
+-------
+
+SPECS		--> SPEC SPECS 
+		 |  /epsilon/
+SPEC		--> CAMERA
+ 		 |  OBJECT
+ 		 |  BACKGROUND
+CAMERA		--> camera { location VECTOR sky VECTOR look_at VECTOR }
+OBJECT		--> SPHERE 
+		 |  PLANE  
+	         |  TRIANGLE
+ 		 |  LIGHT	
+SPHERE		--> sphere { VECTOR, NUMBER [sphere_orient] object_mods }
+SPHERE_ORIENT	--> pole VECTOR equator VECTOR
+PLANE		--> plane { VECTOR, NUMBER OBJECT_MODS }
+PLANE		--> plane_point { VECTOR, VECTOR OBJECT_MODS }
+TRIANGLE	--> triangle { VECTOR, VECTOR, VECTOR OBJECT_MODS }
+TRIANGLE	--> triangle_point { VECTOR, VECTOR, VECTOR OBJECT_MODS }
+PARALLELOGRAM	--> parallelogram { VECTOR, VECTOR, VECTOR OBJECT_MODS }
+PARALLELOGRAM	--> parallelogram_point { VECTOR, VECTOR, VECTOR OBJECT_MODS }
+LIGHT		--> light_source { VECTOR }
+BACKGROUND	--> background { COLOR }
+OBJECT_MODS	--> [pigment] [finish]
+PIGMENT		--> pigment { PIGSPEC }
+PIGSPEC		--> COLOR
+		 |  IMAGE
+FINISH		--> finish { [diffuse NUMBER] [reflection NUMBER] }
+COLOR		--> color rgb VECTOR
+		 |  color red NUMBER green NUMBER blue NUMBER
+IMAGE		--> image_map { ppm NAME }
+VECTOR		--> < number, number, number >
+NAME		--> "string"
+NUMBER		--> integer | float
+
+
+Comments:
+
+* The normal of a plane doesn't have to be normalized when read from
+the description file.
+
+* Pole- and equator vectors for spheres are only needed if textures
+is projected in the sphere. This is not PovRay grammar (it is done
+through rotations of the object and the texture instead)
+
+* A camera has to be included. If several cameras are defined, the
+latest occurrence is used.
+
+* A plane expressed with the plane rule describes a plane with its
+normal and distance from origo along the normal.
+
+* A plane expressed with the plane_point rule describes a plane with
+one point at the plane and its normal. Not PovRay syntax.
+
+* A triangle expressed with the triangle rule describes the corners of
+a triangle in absolute coordinates.
+
+* A triangle expressed with the triangle_point rule describes a
+triangle with one corner in absolute coordinates and the two others
+relative to the first. Not PovRay syntax.
+
+* A parallelogram is almost identical as a triangle, it has only one
+more corner (A parallelogram is two identical triangles, one mirrored
+against the other). Parallelogram does not exist in PovRay.
+
+* Order between statements not entirely arbritrary (PovRay allows this)
+
+* If any value of the objects is ignored, the following defaults are
+used:
+
+  - background	<0, 0, 0>
+  - pole	<0, 1, 0>
+  - equator	<1, 0, 0>
+  - finish	reflection 0, diffuse 1
+  - pigment	color rgb <0.5, 0.5, 0.5>
+
+==============================
+End of Description File Syntax

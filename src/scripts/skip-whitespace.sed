@@ -1,0 +1,2 @@
+# Skip whitespace
+/^[ ]*$/d
